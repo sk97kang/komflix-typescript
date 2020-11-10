@@ -51,6 +51,7 @@ function Upcoming() {
               hoverable
               cover={
                 <img
+                  style={{ minWidth: 100, minHeight: 200 }}
                   alt="poster"
                   src={`https://image.tmdb.org/t/p/w300/${item.poster_path}`}
                 />

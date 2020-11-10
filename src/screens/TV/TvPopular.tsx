@@ -3,26 +3,26 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { BackTop, Card, List, Typography } from "antd";
-import { moviesApi } from "../../lib/api";
-import { MovieType } from "../../lib/type";
+import { tvApi } from "../../lib/api";
+import { TvType } from "../../lib/type";
 import { useInfiniteScroll } from "../../hooks/useInfiniteScroll";
 import { useHistory } from "react-router-dom";
 
 const { Title } = Typography;
 
-function Popular() {
+function TvPopular() {
   const history = useHistory();
-  const [movies, setMovies] = useState<MovieType[]>([]);
+  const [tvShows, setTvShows] = useState<TvType[]>([]);
   const [loading, setLoading] = useState(true);
   const page = useInfiniteScroll();
 
-  const getMovies = async () => {
+  const getTv = async () => {
     try {
       setLoading(true);
       const {
         data: { results },
-      } = await moviesApi.popular(page);
-      setMovies((prev) => [...prev, ...results]);
+      } = await tvApi.popular(page);
+      setTvShows((prev) => [...prev, ...results]);
     } catch (e) {
       console.log(e);
     } finally {
@@ -31,11 +31,11 @@ function Popular() {
   };
 
   useEffect(() => {
-    getMovies();
+    getTv();
   }, [page]);
 
   const goDetail = (id: number) => {
-    history.push(`/movie/${id}`);
+    history.push(`/tv/${id}`);
   };
 
   return (
@@ -43,7 +43,7 @@ function Popular() {
       <Title>Popular Playing</Title>
       <List
         grid={{ gutter: 16, column: 4 }}
-        dataSource={movies}
+        dataSource={tvShows}
         loading={loading}
         renderItem={(item) => (
           <List.Item>
@@ -58,7 +58,7 @@ function Popular() {
               }
               onClick={() => goDetail(item.id)}
             >
-              <Card.Meta title={item.title} description={item.release_date} />
+              <Card.Meta title={item.name} description={item.first_air_date} />
             </Card>
           </List.Item>
         )}
@@ -68,7 +68,7 @@ function Popular() {
   );
 }
 
-export default Popular;
+export default TvPopular;
 
 const Container = styled.div`
   padding: 20px;

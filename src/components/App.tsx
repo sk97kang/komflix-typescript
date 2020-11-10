@@ -10,7 +10,8 @@ import {
 import About from "../screens/About";
 import Movie from "../screens/Movie";
 import MovieDetail from "../screens/Movie/Detail";
-import Tv from "../screens/Tv";
+import TV from "../screens/TV";
+import TvDetail from "../screens/TV/TvDetail";
 
 function App() {
   return (
@@ -34,9 +35,11 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/tv/:tvId"></Route>
+          <Route path="/tv/:tvId">
+            <TvDetail />
+          </Route>
           <Route path="/tv">
-            <Tv />
+            <TV />
           </Route>
           <Route path="/movie/:movieId">
             <MovieDetail />

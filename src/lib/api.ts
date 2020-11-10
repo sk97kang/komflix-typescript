@@ -32,9 +32,10 @@ export const moviesApi = {
 };
 
 export const tvApi = {
-  topRated: () => api.get("tv/top_rated", { params: {} }),
-  popular: () => api.get("tv/popular", { params: {} }),
-  airingToday: () => api.get("tv/airing_today", { params: {} }),
+  topRated: (page: number) => api.get("tv/top_rated", { params: { page } }),
+  popular: (page: number) => api.get("tv/popular", { params: { page } }),
+  airingToday: (page: number) =>
+    api.get("tv/airing_today", { params: { page } }),
   showDetail: (id: number) =>
     api.get(`tv/${id}`, {
       params: {
