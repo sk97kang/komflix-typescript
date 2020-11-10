@@ -4,8 +4,8 @@ export function useInfiniteScroll() {
   const [page, setPage] = useState(1);
   function handleScroll() {
     if (
-      document.documentElement.scrollTop + window.innerHeight ===
-      document.documentElement.scrollHeight
+      document.documentElement.scrollTop + window.innerHeight >=
+      document.documentElement.scrollHeight - 100
     ) {
       setPage((p) => p + 1);
     }

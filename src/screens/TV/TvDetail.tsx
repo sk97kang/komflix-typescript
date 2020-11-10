@@ -19,7 +19,6 @@ function TvDetail() {
       setLoading(true);
       const { data } = await tvApi.showDetail(Number(tvId));
       setTv(data);
-      console.log(data);
     } catch (e) {
       console.log(e);
     } finally {
