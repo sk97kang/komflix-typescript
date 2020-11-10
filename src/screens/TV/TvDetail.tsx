@@ -19,6 +19,7 @@ function TvDetail() {
       setLoading(true);
       const { data } = await tvApi.showDetail(Number(tvId));
       setTv(data);
+      console.log(data);
     } catch (e) {
       console.log(e);
     } finally {
@@ -64,21 +65,8 @@ function TvDetail() {
             ))}
           </Space>
           <Space>{tv.overview}</Space>
-          <Tabs defaultActiveKey="2">
-            <TabPane tab="Companies" key="1">
-              <Space>
-                {tv.production_companies.map((company) => (
-                  <img
-                    key={company.id}
-                    width="100"
-                    height="100"
-                    alt={company.name}
-                    src={`https://image.tmdb.org/t/p/w300/${company.logo_path}`}
-                  />
-                ))}
-              </Space>
-            </TabPane>
-            <TabPane tab="Seasons" key="2">
+          <Tabs defaultActiveKey="1">
+            <TabPane tab="Seasons" key="1">
               <List
                 grid={{ gutter: 16, column: 4 }}
                 dataSource={tv.seasons}
@@ -104,7 +92,36 @@ function TvDetail() {
                 )}
               />
             </TabPane>
-            <TabPane tab="Videos" key="3">
+            <TabPane tab="Companies" key="2">
+              <Space>
+                {tv.production_companies.map((company) => (
+                  <img
+                    key={company.id}
+                    width="100"
+                    height="100"
+                    alt={company.name}
+                    src={`https://image.tmdb.org/t/p/w300/${company.logo_path}`}
+                  />
+                ))}
+              </Space>
+            </TabPane>
+            <TabPane tab="Networks" key="4">
+              <Space style={{ flexWrap: "wrap" }}>
+                {tv.networks.map((network) => (
+                  <img
+                    key={network.id}
+                    width="100"
+                    height="100"
+                    alt={network.name}
+                    src={`https://image.tmdb.org/t/p/w300/${network.logo_path}`}
+                  />
+                ))}
+              </Space>
+            </TabPane>
+            <TabPane tab="Country" key="5">
+              <Tag>{tv.origin_country}</Tag>
+            </TabPane>
+            <TabPane tab="Videos" key="6">
               {tv.videos.results.length > 0 ? (
                 <YouTube videoId={tv.videos.results[0].key} />
               ) : (

@@ -69,9 +69,9 @@ function MovieDetail() {
             ))}
           </Space>
           <Space>{movie.overview}</Space>
-          <Tabs defaultActiveKey="1">
+          <Tabs defaultActiveKey="3">
             <TabPane tab="Companies" key="1">
-              <Space>
+              <Space style={{ flexWrap: "wrap" }}>
                 {movie.production_companies.map((company) => (
                   <img
                     key={company.id}
