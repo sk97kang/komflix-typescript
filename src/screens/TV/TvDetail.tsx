@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { Card, List, Rate, Space, Tabs, Tag, Typography } from "antd";
 
@@ -15,22 +15,21 @@ function TvDetail() {
   const { tvId } = useParams<{ tvId: string }>();
   const [tv, setTv] = useState<TvDetailType>();
   const [loading, setLoading] = useState(true);
-  const getTv = async () => {
+  const getTv = useCallback(async () => {
     try {
       setLoading(true);
       const { data } = await tvApi.showDetail(Number(tvId));
-      console.log(data);
       setTv(data);
     } catch (e) {
       console.log(e);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getTv();
-  }, []);
+  }, [getTv]);
 
   return loading || tv === undefined ? null : (
     <Container>

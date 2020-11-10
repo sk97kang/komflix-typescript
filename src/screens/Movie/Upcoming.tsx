@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import styled from "styled-components";
 
@@ -16,7 +16,7 @@ function Upcoming() {
   const [loading, setLoading] = useState(true);
   const page = useInfiniteScroll();
 
-  const getMovies = async () => {
+  const getMovies = useCallback(async () => {
     try {
       setLoading(true);
       const {
@@ -28,11 +28,11 @@ function Upcoming() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [page]);
 
   useEffect(() => {
     getMovies();
-  }, [page]);
+  }, [page, getMovies]);
 
   const goDetail = (id: number) => {
     history.push(`/movie/${id}`);

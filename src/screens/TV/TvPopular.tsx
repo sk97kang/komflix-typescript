@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import styled from "styled-components";
 
@@ -16,7 +16,7 @@ function TvPopular() {
   const [loading, setLoading] = useState(true);
   const page = useInfiniteScroll();
 
-  const getTv = async () => {
+  const getTv = useCallback(async () => {
     try {
       setLoading(true);
       const {
@@ -28,11 +28,11 @@ function TvPopular() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [page]);
 
   useEffect(() => {
     getTv();
-  }, [page]);
+  }, [page, getTv]);
 
   const goDetail = (id: number) => {
     history.push(`/tv/${id}`);

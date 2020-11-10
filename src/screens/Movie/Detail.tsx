@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Rate, Space, Tabs, Tag, Typography } from "antd";
 
@@ -14,7 +14,8 @@ function MovieDetail() {
   const { movieId } = useParams<{ movieId: string }>();
   const [movie, setMovie] = useState<MovieDetailType>();
   const [loading, setLoading] = useState(true);
-  const getMovie = async () => {
+
+  const getMovie = useCallback(async () => {
     try {
       setLoading(true);
       const { data } = await moviesApi.movieDetail(Number(movieId));
@@ -24,11 +25,11 @@ function MovieDetail() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getMovie();
-  }, []);
+  }, [getMovie]);
 
   return loading || movie === undefined ? null : (
     <Container>
