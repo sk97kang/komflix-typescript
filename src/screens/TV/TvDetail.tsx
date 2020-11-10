@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Card, List, Rate, Space, Tabs, Tag, Typography } from "antd";
 
 import styled from "styled-components";
@@ -11,7 +11,6 @@ const { Title, Text } = Typography;
 const { TabPane } = Tabs;
 
 function TvDetail() {
-  const history = useHistory();
   const { tvId } = useParams<{ tvId: string }>();
   const [tv, setTv] = useState<TvDetailType>();
   const [loading, setLoading] = useState(true);
@@ -25,7 +24,7 @@ function TvDetail() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [tvId]);
 
   useEffect(() => {
     getTv();

@@ -25,7 +25,7 @@ function MovieDetail() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [movieId]);
 
   useEffect(() => {
     getMovie();
