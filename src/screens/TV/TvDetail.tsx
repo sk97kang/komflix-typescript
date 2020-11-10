@@ -47,7 +47,7 @@ function TvDetail() {
               {tv.name}
             </Title>
             <Tag color="#F5C518">
-              <a href={tv.homepage} target="_blank">
+              <a href={tv.homepage} target="_blank" rel="noreferrer">
                 Homepage
               </a>
             </Tag>

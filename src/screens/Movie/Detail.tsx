@@ -51,6 +51,7 @@ function MovieDetail() {
               <a
                 href={`https://www.imdb.com/title/${movie.imdb_id}/`}
                 target="_blank"
+                rel="noreferrer"
               >
                 IMDB
               </a>
