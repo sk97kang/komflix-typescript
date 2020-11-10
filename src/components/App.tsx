@@ -1,8 +1,15 @@
 import { Menu } from "antd";
 import React from "react";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import About from "../screens/About";
 import Movie from "../screens/Movie";
+import MovieDetail from "../screens/Movie/Detail";
 import Tv from "../screens/Tv";
 
 function App() {
@@ -10,9 +17,9 @@ function App() {
     <Router>
       <div>
         <nav>
-          <Menu mode="horizontal">
-            <Menu.Item>
-              <Link to="/">Movie</Link>
+          <Menu mode="horizontal" activeKey="movie">
+            <Menu.Item key="movie">
+              <Link to="/movie">Movie</Link>
             </Menu.Item>
             <Menu.Item>
               <Link to="/tv">Tv</Link>
@@ -23,18 +30,21 @@ function App() {
           </Menu>
         </nav>
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/about">
             <About />
           </Route>
+          <Route path="/tv/:tvId"></Route>
           <Route path="/tv">
             <Tv />
           </Route>
-          <Route path="/">
+          <Route path="/movie/:movieId">
+            <MovieDetail />
+          </Route>
+          <Route path="/movie">
             <Movie />
           </Route>
+          <Redirect from="*" to="/movie" />
         </Switch>
       </div>
     </Router>
